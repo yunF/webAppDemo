@@ -30,20 +30,20 @@ const rules = {
     required: true,
     isMobile: true,
     remote: {
-      url: "./text.html",
-      type: "get",
-      dataType: "html",
+      url: "v1/ecom/member/getphone",
+      type: "GET",
+      dataType: "json",
+      contentType: "application/json;charset=utf-8",
       data: {
-        value: $("#phone").val(),
-        type: "phone",
+        params: function () {
+          return $("#phone").val().replace(/( )/g, "").replace(/(\+)/g, "");
+        },
       },
       dataFilter: function (data, type) {
-        const search = window.location.search.replace("?", "");
-        if (!search) return false;
-        const { only } = transformJson(search);
-        //AJAX异步返回数据
-        if (!!only) {
-          $(".getCode").removeClass("disabled");
+        // var search = window.location.search.replace("?", "");--------------
+        // if (!search) return false;
+        let obj = JSON.parse(data);
+        if (obj.resultCode !== 0) {
           return true;
         } else {
           $(".getCode").addClass("disabled");
@@ -227,20 +227,20 @@ $("#model .button").on("click", function () {
 });
 $(".getCode").on("click", function (e) {
   if ($(this).attr("class").indexOf("disabled") !== -1) return false;
-  // $.ajax({
-  //   type: "POST",
-  //   url: url,
-  //   data: data,
-  //   dataType: dataType,
-  //   success: function () {
-
-  if (time === 59) {
-    setTime();
-    $(this).addClass("start");
-  }
-  // },
-  // error: function () {},
-  // });
+  $.ajax({
+    type: "POST",
+    url: "v1/ecom/member/sendCode",
+    data: JSON.stringify(data),
+    contentType: "application/json",
+    success: function (data) {
+      data.resultCode === 0
+        ? time === 59 && setTime()
+        : model().open("獲取驗證碼失败");
+    },
+    error: function () {
+      model().open("獲取驗證碼失败");
+    },
+  });
 });
 
 // 自定义验证规则
@@ -257,7 +257,7 @@ $.validator.addMethod(
   function (value, element) {
     const val = value.replace(/\s/g, "");
     const mobile =
-      /^\+852(5[1234569]\d{6}$|6\d{7}$|9[0-8]\d{6}$)|^\+853[6]([8|6])\d{5}$/;
+      /^\+852(5[1234569]\d{6}|6\d{7}|9[0-8]\d{6})$|^\+853[6]([8|6])\d{5}$/;
 
     if (!mobile.test(val)) {
       $(".getCode").addClass("disabled");
@@ -276,26 +276,27 @@ $.validator.addMethod(
 function submitHandler(form) {
   const data = transformJson($(form).serialize());
   console.log(data);
-  // $.ajax({
-  //   type: "POST",
-  //   url: url,
-  //   data: data,
-  //   dataType: dataType,
-  //   success: function () {
-  console.log(data.gender);
-  if (Number(data.gender) === 106) {
-    model().open(
-      "謝謝您的登記!HK$100購物優惠券將於24小時內以短訊形式發送至登記手機號碼。Thank you, you have successfully registered as our new Explorer! HK$100 cash coupon will be sent to your registered mobile within 24 hours."
-    );
-    return false;
-  } else {
-    model().open("系统正忙，请稍后再试。");
-  }
-  // },
-  // error: function () {
-  model().open("系统正忙，请稍后再试。");
-  // },
-  // });
+  $.ajax({
+    type: "POST",
+    url: "v1/ecom/member/register",
+    data: JSON.stringify(data),
+    contentType: "application/json",
+    success: function (a, b, c) {
+      console.log(a);
+      console.log(b);
+      console.log(c);
+      if (a.resultCode === 0) {
+        model().open(
+          "謝謝您的登記!HK$100購物優惠券將於24小時內以短訊形式發送至登記手機號碼。Thank you, you have successfully registered as our new Explorer! HK$100 cash coupon will be sent to your registered mobile within 24 hours."
+        );
+      } else {
+        model().open(a.resultDesc);
+      }
+    },
+    error: function () {
+      model().open("提交失败");
+    },
+  });
 }
 
 function transformJson(str) {
