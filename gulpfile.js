@@ -122,7 +122,7 @@ function serve() {
     ".tmp/fonts/**/*",
   ]).on("change", reload);
 
-  // watch("app/styles/**/*.scss", series();
+  // watch("app/styles/**/*.scss", series(stylesSass);
   watch("app/styles/**/*.less", series(stylesLess));
   watch("app/scripts/**/*.js", series(scripts));
   watch("app/fonts/**/*", series(fonts));
@@ -183,16 +183,16 @@ function build() {
 }
 
 exports.Wiredep = parallel(wiredep_styles, wiredep_html);
-exports.serve = series(parallel( stylesLess, scripts, fonts), serve);
+exports.serve = series(parallel(stylesLess, scripts, fonts), serve);
 exports.serveDist = serveDist;
 exports.serveTest = series(scripts, serveTest);
 exports.build = parallel(
-  series( stylesLess, scripts, html),
+  series(stylesLess, scripts, html),
   images,
   fonts,
   extras
 );
 exports.default = series(
   clean,
-  parallel(series( stylesLess, scripts, html), images, fonts, extras)
+  parallel(series(stylesLess, scripts, html), images, fonts, extras)
 );
