@@ -1,5 +1,490 @@
-// bower:less
-@import "bower_components/unslider/src/css/unslider-dots.less";
-@import "bower_components/unslider/src/css/unslider.less";
-@import "bower_components/unslider/src/css/variables.less";
-// endbower
+html {
+  height: auto;
+  min-height: 100%;
+}
+body {
+  height: auto;
+  min-height: 100vh;
+  background: url("../images/201106-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: center 0;
+  font-family: "Microsoft JhengHei", "ST Heiti", "MS Hei", Helvetica, Arial,
+    sans-serif !important;
+}
+
+input,
+input:focus,
+input:focus-visible,
+select,
+select:focus,
+select:focus-visible {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline !important;
+  &:hover {
+    color: inherit;
+  }
+}
+
+/* ======================================== */
+
+.formBox {
+  width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #eab65a;
+  .logo {
+    padding: 20px;
+    text-align: center;
+    img {
+      width: 30%;
+      max-width: 120px;
+    }
+  }
+  .formInfo {
+    color: #333;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+    padding: 20px 0;
+    .none {
+      display: none;
+    }
+  }
+
+  form {
+    .formItem {
+      position: relative;
+      padding-bottom: 5px;
+      width: 100%;
+
+      label.title {
+        width: 100%;
+        display: block;
+        padding: 6px 0;
+        line-height: 25px;
+        font-size: 15px;
+        color: #000;
+        margin: 0;
+        span.red {
+          color: red;
+        }
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      input[type="tel"],
+      select {
+        width: 100%;
+        padding: 4px 14px;
+        background-color: #fff;
+        border: 1px solid #d0d0d0;
+        text-align: center;
+        height: 34px;
+        appearance: none !important;
+        position: relative;
+        text-align-last: center;
+      }
+      input[type="checkbox"] {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+        position: absolute;
+        top: 10px;
+        left: 9px;
+      }
+      .selectBox {
+        position: relative;
+        &::after {
+          display: block;
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 6px solid;
+          border-color: #000 transparent transparent transparent;
+          top: 14px;
+          right: 13px;
+        }
+      }
+      select option {
+        text-align: left;
+        font-weight: normal;
+        display: block;
+        white-space: nowrap;
+        min-height: 1.2em;
+        padding: 0px 2px 1px;
+      }
+
+      .language {
+        display: inline-block;
+        width: 49.5%;
+        height: 34px;
+        padding: 5px 0 5px 38px;
+        position: relative;
+        line-height: 24px;
+        cursor: pointer;
+        font-size: 12px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 6px;
+          left: 5px;
+          display: block;
+          width: 22px;
+          height: 22px;
+          border: 2px solid #000;
+          border-radius: 50%;
+        }
+        &:hover {
+          &::after {
+            border: 3px solid #000;
+          }
+        }
+        &.current::after {
+          background-color: #000;
+        }
+        &.current::before {
+          content: "";
+          position: absolute;
+          top: 10px;
+          left: 13px;
+          z-index: 2;
+          width: 7px;
+          height: 11px;
+          border-right: 2px solid #eab65a;
+          border-bottom: 2px solid #eab65a;
+          transform: rotate(40deg);
+        }
+      }
+
+      .checkbox {
+        display: inline-block;
+
+        line-height: 24px;
+        cursor: pointer;
+        font-size: 12px;
+        user-select: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 6px;
+          left: 5px;
+          display: block;
+          width: 22px;
+          height: 22px;
+          border: 1px solid #000;
+          box-shadow: 0px 0px 2px #000 inset;
+        }
+        &:hover {
+          &::after {
+            border: 2px solid #000;
+          }
+        }
+        &.current::after {
+          background-color: #000;
+        }
+        &.current::before {
+          content: "";
+          position: absolute;
+          top: 10px;
+          left: 13px;
+          z-index: 2;
+          width: 7px;
+          height: 11px;
+          border-right: 2px solid #eab65a;
+          border-bottom: 2px solid #eab65a;
+          transform: rotate(40deg);
+        }
+      }
+    }
+    .group {
+      display: flex;
+      justify-content: space-between;
+    }
+    .lasetName {
+      width: 33%;
+    }
+    .firstName {
+      width: 33%;
+    }
+    .gender {
+      width: 33%;
+    }
+
+    .extra {
+      color: #000000;
+      font-size: 11px;
+      line-height: 18px;
+      padding: 2% 0px;
+      text-align: left;
+    }
+    .checkText {
+      color: #444;
+      font-size: 12px;
+      line-height: 24px;
+      padding: 5px 0 5px 38px;
+      position: relative;
+    }
+    .formFooter {
+      padding: 20px 0;
+      text-align: center;
+      .submit {
+        background: #000;
+        padding: 8px 20px;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        width: 250px;
+        margin: auto;
+        position: relative;
+        user-select: none;
+        &:hover {
+          background-color: #1b1b1b;
+          // &::after {
+          // }
+        }
+        &::after {
+          content: "\f138";
+          position: absolute;
+          font-family: "Font Awesome 5 Free" !important;
+          font-weight: 900;
+          color: #fff;
+          font-size: 18px;
+          line-height: 30px;
+          right: 30px;
+        }
+
+        &.disabled {
+          background-color: #444;
+          cursor: not-allowed;
+          color: #d0d0d0;
+        }
+      }
+    }
+    .hidden {
+      display: none;
+    }
+
+    .year,
+    .month,
+    .day {
+      width: 49.6%;
+    }
+  }
+
+  .ant-form-item-label {
+    padding: 6px 0;
+    label {
+      line-height: 25px;
+      font-size: 15px;
+    }
+  }
+  .ant-input {
+    padding: 4px 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 0px;
+    text-align: center;
+    height: 34px;
+  }
+}
+
+//  表单验证
+.formItem span.error {
+  font-size: 12px;
+  padding: 5px 0px;
+  color: #f00;
+}
+.formItem {
+  input[type="text"].error,
+  input[type="tel"].error,
+  input[type="date"].error,
+  input[id="month"].error,
+  input[id="day"].error,
+  select.error {
+    color: #b94a48 !important;
+    background-color: #f2dede !important;
+    border: 1px solid #eed3d7 !important;
+    opacity: 0.5;
+  }
+}
+
+// 弹窗
+
+.model {
+  display: none;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999999;
+
+  .content {
+    position: absolute;
+    width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%;-50%);
+    background: #eab65a;
+    .logo {
+      padding: 20px;
+      text-align: center;
+      img {
+        width: 30%;
+        max-width: 120px;
+      }
+    }
+    .formInfo {
+      color: #333;
+      font-size: 15px;
+      line-height: 25px;
+      text-align: center;
+      padding: 20px 0;
+      .none {
+        display: none;
+      }
+    }
+  }
+  .formFooter {
+    padding: 20px 0;
+    text-align: center;
+    .button {
+      background: #000;
+      padding: 8px 20px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      width: 250px;
+      margin: auto;
+      position: relative;
+      user-select: none;
+      &:hover {
+        background-color: #1b1b1b;
+      }
+    }
+  }
+  &.show {
+    display: inline-block;
+  }
+}
+
+// 手機驗證碼
+.phoneBox {
+  // padding-right: 110px;
+  position: relative;
+}
+#code {
+  padding-right: 110px;
+}
+
+.getCode {
+  background-color: #000;
+  color: #fff;
+  width: 100px;
+  height: 24px;
+  line-height: 24px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+
+  &.disabled {
+    background-color: #444;
+    cursor: not-allowed;
+  }
+  &.start {
+    cursor: not-allowed;
+  }
+}
+
+/* ======================================== */
+@media only screen and (max-width: 480px) {
+  .none {
+    display: block !important;
+  }
+  .formBox .logo {
+    padding: 10px;
+  }
+  .submit {
+    width: 100% !important;
+  }
+  .group {
+    flex-wrap: wrap;
+  }
+  .lasetName {
+    width: 49.5% !important;
+  }
+  .firstName {
+    width: 49.5% !important;
+  }
+  .gender {
+    width: 100% !important;
+  }
+  .language {
+    width: 100% !important;
+  }
+  .mobel .content {
+    width: 100% !important;
+  }
+  .year {
+    width: 100% !important;
+  }
+  .month {
+    width: 100% !important;
+    margin-bottom: 11px;
+  }
+  .day {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .main {
+    padding: 15px;
+  }
+  .formBox {
+    width: 100%;
+  }
+}
+
+.iti {
+  display: block;
+}
+
+.iti__flag {
+  background-image: url("../images/flags.png");
+}
+.iti__selected-flag {
+  width: 60px;
+  height: 34px;
+  justify-content: space-between;
+}
+.iti__arrow {
+  display: block;
+  width: 0;
+  height: 0;
+  border: 6px solid;
+  border-bottom: 0px;
+  border-color: #000 transparent transparent transparent;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("../images/flags@2x.png");
+  }
+}

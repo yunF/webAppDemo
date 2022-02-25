@@ -1,35 +1,308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="./cropped-PQACanQt_400x400-32x32.jpg"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="./cropped-PQACanQt_400x400-192x192.jpg"
+      sizes="192x192"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="./cropped-PQACanQt_400x400-180x180.jpg"
+    />
+    <meta
+      name="msapplication-TileImage"
+      content="./cropped-PQACanQt_400x400-270x270.jpg"
+    />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>test</title>
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <!-- Place favicon.ico in the root directory -->
-  <!-- build:css styles/vendor.css -->
-  <!-- bower:css -->
-  <!-- endbower -->
-  <link rel="stylesheet" href="styles/less.css">
-  <link rel="stylesheet" href="styles/scss.css">
-  <!-- endbuild -->
-  <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
-</head>
+    <title>The North Face</title>
+    <!-- Place favicon.ico in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <link rel="stylesheet" href="styles/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="styles/intlTelInput.min.css" />
+    <link rel="stylesheet" href="styles/all.min.css" />
+    <link rel="stylesheet" href="styles/less.css" />
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <!-- endbuild -->
+  </head>
 
-<body>
-  
-  <!-- build:js scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="/bower_components/jQuery/dist/jquery.min.js"></script>
-  <script src="/bower_components/unslider/src/js/unslider.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:js scripts/main.js -->
-  <script src="scripts/main.js"></script>
-  <!-- endbuild -->
-</body>
+  <body>
+    <div class="main">
+      <div class="formBox formEdit">
+        <div class="logo"><img src="./images/logo.png" alt="LOGO" /></div>
+        <div class="formInfo">
+          <div class="info">
+            登記成為 The North Face Explorer，<br class="none" />獲取港幣 $100
+            購物優惠券及最新資訊！
+            <br />
+            Register as The North Face Explorer to receive a HK$100 cash coupon
+            and stay tuned with our latest news!
+          </div>
+        </div>
+        <form id="form">
+          <div class="group">
+            <div class="formItem lasetName">
+              <label class="title">
+                姓氏 Last Name<span class="red">*</span>
+              </label>
+              <input type="text" id="lastName" name="lastName" />
+            </div>
+            <div class="formItem firstName">
+              <label class="title">
+                名字 First Name<span class="red">*</span>
+              </label>
+              <input type="text" id="firstName" name="firstName" />
+            </div>
+            <div class="formItem gender">
+              <label class="title">
+                性別 Gender<span class="red">*</span>
+              </label>
+              <div class="selectBox">
+                <select id="gender" name="gender" placeholder>
+                  <option value="" selected data-default>
+                    請選擇 Please select
+                  </option>
+                  <option value="106">男／M</option>
+                  <option value="107">女／F</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
+          <div class="formItem">
+            <label class="title">
+              手提電話 Phone Number<span class="red">*</span>
+            </label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+          <div class="formItem">
+            <label class="title">
+              驗證碼 Verification Code<span class="red">*</span></label
+            >
+            <div class="phoneBox">
+              <input type="text" id="code" name="code" />
+              <div class="getCode disabled">獲取驗證碼</div>
+            </div>
+          </div>
+          <div class="formItem">
+            <label class="title"
+              >電郵地址 Email<span class="red">*</span></label
+            >
+            <input type="text" id="email" name="email" />
+          </div>
+          <div class="formItem">
+            <label class="title">
+              生日月、日 Birthday<span class="red">*</span>
+            </label>
+            <!-- <input id="birthday" name="birthday" type="date" required /> -->
+            <div class="group birthday">
+              <!-- <div class="selectBox year">
+                <select name="year" id="year" placeholder>
+                  <option value="" selected data-default>
+                    請選擇 Please select
+                  </option>
+                </select>
+              </div> -->
+              <div class="selectBox month">
+                <select name="month" id="month" placeholder>
+                  <option value="" selected data-default>
+                    請選擇 Please select
+                  </option>
+                  <option value="1">1月</option>
+                  <option value="2">2月</option>
+                  <option value="3">3月</option>
+                  <option value="4">4月</option>
+                  <option value="5">5月</option>
+                  <option value="6">6月</option>
+                  <option value="7">7月</option>
+                  <option value="8">8月</option>
+                  <option value="9">9月</option>
+                  <option value="10">10月</option>
+                  <option value="11">11月</option>
+                  <option value="12">12月</option>
+                </select>
+              </div>
+              <div class="selectBox day">
+                <select name="day" id="day">
+                  <option value="" selected data-default>
+                    請選擇 Please select
+                  </option>
+                  <option value="1">1日</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="formItem">
+            <input
+              style="display: none"
+              type="radio"
+              name="language"
+              id="language-cn"
+              value="cn"
+            />
+            <input
+              style="display: none"
+              type="radio"
+              name="language"
+              id="language-en"
+              value="en"
+            />
+
+            <label class="title">語言偏好 Language reference</label>
+            <label class="language" for="language-cn">中文 Chinese</label>
+            <label class="language" for="language-en">英文 English</label>
+          </div>
+          <div class="formItem">
+            <label class="title"
+              >請選擇最接近你的專門店 Please select your nearest store<span
+                class="red"
+                >*</span
+              ></label
+            >
+            <div class="selectBox">
+              <select name="store" id="store">
+                <option value="" selected data-default>
+                  請選擇 Please select
+                </option>
+                <option value="121">
+                  K11 購物藝術館 205號 | SHOP 205, K11 ART MALL
+                </option>
+                <option value="122">
+                  又一城L2-07號 | SHOP L2-07, FESTIVAL WALK
+                </option>
+                <option value="123">
+                  海運大廈265 &amp; 265A 號 | SHOP 265 &amp; 265A, OCEAN
+                  TERMINAL
+                </option>
+                <option value="124">德福廣場F24號 | SHOP F24, TELFORD</option>
+                <option value="125">
+                  朗豪坊7樓13-16號 | SHOP 13-16, 7/F, LANGHAM PLACE
+                </option>
+                <option value="126">
+                  新城市廣場 505號 | SHOP 505, NEW TOWN PLAZA
+                </option>
+                <option value="127">
+                  屯門市廣場1222號 | SHOP 1222, TMT PLAZA
+                </option>
+                <option value="128">PopCorn F60號 | SHOP F60, POPCORN</option>
+                <option value="129">
+                  新都會廣場116號 | SHOP 116, METROPLAZA
+                </option>
+                <option value="130">崇光百貨 4樓 | 4/F, SOGO</option>
+                <option value="132">
+                  澳門金沙廣場2239號 | Shop2239, Shoppes at Cotai Central, Macau
+                </option>
+                <option value="133">
+                  澳門荷蘭園正街83A地下 | Av.Cons.Ferreira De Almeida No.83A,
+                  Macau
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="extra" style="margin-bottom: 20px">
+            *必須填寫欄目。Required fields.
+          </div>
+          <div class="formItem">
+            <input
+              type="checkbox"
+              id="statementOne"
+              name="statementOne"
+              value="true"
+            />
+
+            <div class="checkText">
+              <label class="checkbox" for="statementOne"></label>
+              優惠只適用於新登記的 The North Face Explorer。成功登記後，HK$100
+              購物優惠將會透過手機短訊發送。優惠只適用於單一發票金額滿港幣淨價$1000或以上之貨品及同一交易每滿$1000可使用1次。
+              如有任何爭議，VF HK Ltd. 保留最終決定權。Offer is only applicable
+              to new The North Face Explorer. You will receive the HK$100 offer
+              via SMS after successful online application. This offer is only
+              applicable for any single purchase in excess of net HK$1000 or
+              above and each transaction can use more than once with every
+              HK$1000 purchase. In case of any dispute, VF HK Ltd. reserves the
+              right of final decision.
+            </div>
+          </div>
+          <div class="formItem">
+            <input
+              type="checkbox"
+              id="statementTwo"
+              name="statementTwo"
+              value="true"
+            />
+
+            <div class="checkText">
+              <label class="checkbox" for="statementTwo"></label>
+              閣下已經閱讀並同意我們的《
+              <a
+                class="link"
+                href="javascript:void(0)"
+                data-url="https://www.thenorthface.com.hk/privacy-policy/"
+                target="_blank"
+                >個人資料收集聲明</a
+              >
+              》並收取The North Face Hong Kong所發出的市場推廣和宣傳資訊。I read
+              and agree the
+              <a
+                href="https://www.thenorthface.com.hk/privacy-policy/"
+                target="_blank"
+                >Personal Information Collection Policy</a
+              >
+              and want to receive marketing and promotional message from The
+              North Face Hong Kong.
+            </div>
+          </div>
+          <div class="formItem">
+            <div class="extra">
+              *購物優惠適用於The North Face及Urban Exploration 專門店
+              (不包括Outlet)<br />
+              *Offer is valid at The North Face & Urban Exploration Stores
+              Regular Stores (except Outlet)<br /><br />
+              *優惠不適用於指定貨品，不可與其他優惠同時使用。<br />
+              *This offer is NOT applicable to selected items and cannot be used
+              in conjunction with other promotions.
+            </div>
+          </div>
+          <div class="formFooter">
+            <!-- <input class="submit" type="submit" value="提交 Submit" /> -->
+            <div class="submit" id="sublmit">提交 Submit</div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="model" id="model">
+      <div class="content">
+        <div class="logo"><img src="./images/logo.png" alt="LOGO" /></div>
+        <div class="formInfo"></div>
+        <div class="formFooter">
+          <div class="button">確定</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="scripts/jquery-3.6.0.min.js"></script>
+    <script src="scripts/jquery.validate.min.js"></script>
+    <script src="scripts/intlTelInput-jquery.js"></script>
+    <script src="scripts/dayjs.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>
