@@ -1,36 +1,45 @@
-// $(function ($) {});
+$(function ($) {
+  const parameter1 = getUrlParam("parameter1");
+  const parameter2 = getUrlParam("parameter2");
+  const timestamp = getUrlParam("timestamp");
+  const appid = getUrlParam("appid");
+  const sign = getUrlParam("sign");
 
-const n = new model();
-$("#submit").on("click", function () {
-  console.log("ee");
+  const n = new model();
 
-  n.open({ text: "提交中。。。", hideButton: true });
+  $("#submit").on("click", function () {
+    n.open({ text: "提交中。。。", hideButton: true });
 
-  $.ajax({
-    type: "POST",
-    url: "./test.html",
-    data: {
-      userToken: 23443,
-    },
-    success: function (msg) {
-      n.open({
-        text: "提交失败",
-        hideButton: false,
-        onclickCallback: () => {
-          alert("Data Saved: ");
-        },
-      });
-    },
-    error: function (err) {
-      setTimeout(function () {
+    $.ajax({
+      type: "GET",
+      url: `https://clmapi-hk-stg.thenorthface.com.cn/tnf-hk-uat-customer-service/v1/member/api/issigned/${parameter1}/${parameter2}`,
+      headers: {
+        timestamp,
+        appid,
+        sign,
+      },
+      success: function (msg) {
+        const { resultCode, resultDesc } = msg;
+        if (resultCode === -1) {
+          n.open({
+            text: resultDesc,
+            hideButton: false,
+          });
+          return false;
+        }
         n.open({
-          text: "提交失败",
-          onclickCallback: () => {
-            window.location.replace("https://google.com");
-          },
+          text: "提交成功",
+          hideButton: false,
         });
-      }, 1000);
-    },
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus);
+        console.log(errorThrown);
+        n.open({
+          text: "提交失敗,請檢查網絡連接",
+        });
+      },
+    });
   });
 });
 
@@ -66,4 +75,11 @@ function model(ope) {
   OK.on("click", function () {
     that.close();
   });
+}
+
+function getUrlParam(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]);
+  return null;
 }

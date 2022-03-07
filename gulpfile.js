@@ -4,27 +4,34 @@ const browserSync = require("browser-sync");
 const del = require("del");
 const wiredep = require("wiredep").stream;
 const reload = browserSync.reload;
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
-function stylesSass() {
-  return src("app/styles/*.scss")
-    .pipe($.plumber())
-    .pipe($.sourcemaps.init())
-    .pipe(
-      $.sass
-        .sync({
-          outputStyle: "expanded",
-          precision: 10,
-          includePaths: ["."],
-        })
-        .on("error", $.sass.logError)
-    )
-    .pipe(
-      $.autoprefixer({ browsers: ["> 1%", "last 2 versions", "Firefox ESR"] })
-    )
-    .pipe($.sourcemaps.write())
-    .pipe(dest(".tmp/styles"))
-    .pipe(reload({ stream: true }));
-}
+const apiProxy = createProxyMiddleware("/v1", {
+  target:
+    "https://clmapi-hk-stg.thenorthface.com.cn/tnf-hk-uat-customer-service",
+  changeOrigin: true, // for vhosted sites
+});
+
+// function stylesSass() {
+//   return src("app/styles/*.scss")
+//     .pipe($.plumber())
+//     .pipe($.sourcemaps.init())
+//     .pipe(
+//       $.sass
+//         .sync({
+//           outputStyle: "expanded",
+//           precision: 10,
+//           includePaths: ["."],
+//         })
+//         .on("error", $.sass.logError)
+//     )
+//     .pipe(
+//       $.autoprefixer({ browsers: ["> 1%", "last 2 versions", "Firefox ESR"] })
+//     )
+//     .pipe($.sourcemaps.write())
+//     .pipe(dest(".tmp/styles"))
+//     .pipe(reload({ stream: true }));
+// }
 
 function stylesLess() {
   return src("app/styles/*.less")
@@ -109,9 +116,11 @@ function serve() {
     port: 9000,
     server: {
       baseDir: [".tmp", "app"],
+      index: "index.html",
       routes: {
         "/bower_components": "bower_components",
       },
+      middleware: [apiProxy],
     },
   });
 
